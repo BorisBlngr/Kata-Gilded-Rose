@@ -9,31 +9,30 @@ class GildedRose {
 
     void updateQuality() {
         for (Item item : items) {
+            decreaseSellIn(item);
             if (isAgedBrie(item)) {
-                increaseQualityOf(item, 1);
-            } else if (isBackstage(item)) {
-                if (item.sellIn > 10) {
-                    increaseQualityOf(item, 1);
-                } else if (item.sellIn > 5) {
+                if (item.sellIn < 0) {
                     increaseQualityOf(item, 2);
                 } else {
+                    increaseQualityOf(item, 1);
+                }
+            } else if (isBackstage(item)) {
+                if (item.sellIn >= 10) {
+                    increaseQualityOf(item, 1);
+                } else if (item.sellIn >= 5) {
+                    increaseQualityOf(item, 2);
+                } else if (item.sellIn >= 0) {
                     increaseQualityOf(item, 3);
+                } else {
+                    item.quality = 0;
                 }
             } else {
                 lowerQualityOf(item);
             }
 
-            decreaseSellIn(item);
-
             if (item.sellIn < 0) {
-                if (isAgedBrie(item)) {
-                    increaseQualityOf(item, 1);
-                } else {
-                    if (isBackstage(item)) {
-                        item.quality = 0;
-                    } else {
-                        lowerQualityOf(item);
-                    }
+                if (!isAgedBrie(item) && !isBackstage(item)) {
+                    lowerQualityOf(item);
                 }
             }
         }
