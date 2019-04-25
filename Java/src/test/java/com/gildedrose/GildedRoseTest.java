@@ -1,9 +1,13 @@
 package com.gildedrose;
 
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RunWith(JUnitParamsRunner.class)
 public class GildedRoseTest {
     @Test
     public void common_item_decrease_in_quality() {
@@ -14,9 +18,10 @@ public class GildedRoseTest {
         assertThat(app.items[0].quality).isEqualTo(1);
     }
 
+    @Parameters({"0,0", "0,1", "1,1"})
     @Test
-    public void item_quality_should_never_be_negative() {
-        Item[] items = new Item[]{new Item("foo", 0, 0)};
+    public void item_quality_should_never_be_negative(int sellIn, int quality) {
+        Item[] items = new Item[]{new Item("foo", sellIn, quality)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
 
@@ -84,5 +89,14 @@ public class GildedRoseTest {
         app.updateQuality();
 
         assertThat(app.items[0].quality).isEqualTo(36);
+    }
+
+    @Test
+    public void common_item_decrease_in_quality_by_2_when_sellIn_is_negative() {
+        Item[] items = new Item[]{new Item("foo", 0, 2)};
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+
+        assertThat(app.items[0].quality).isEqualTo(0);
     }
 }

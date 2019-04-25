@@ -27,25 +27,23 @@ class GildedRose {
                     item.quality = 0;
                 }
             } else {
-                lowerQualityOf(item);
-            }
-
-            if (item.sellIn < 0) {
-                if (!isAgedBrie(item) && !isBackstage(item)) {
-                    lowerQualityOf(item);
+                if (item.sellIn < 0) {
+                    lowerQualityOf(item, 2);
+                } else {
+                    lowerQualityOf(item, 1);
                 }
             }
         }
     }
 
     private void decreaseSellIn(Item item) {
-        if (!isLegendary(item)) {
+        if (isNotLegendary(item)) {
             item.sellIn--;
         }
     }
 
-    private boolean isLegendary(Item item) {
-        return item.name.equals("Sulfuras, Hand of Ragnaros");
+    private boolean isNotLegendary(Item item) {
+        return !item.name.equals("Sulfuras, Hand of Ragnaros");
     }
 
     private boolean isBackstage(Item item) {
@@ -62,10 +60,10 @@ class GildedRose {
         }
     }
 
-    private void lowerQualityOf(Item item) {
+    private void lowerQualityOf(Item item, int number) {
         if (item.quality > 0) {
-            if (!isLegendary(item)) {
-                item.quality--;
+            if (isNotLegendary(item)) {
+                item.quality = item.quality - number < 0 ? 0 : item.quality - number;
             }
         }
     }
