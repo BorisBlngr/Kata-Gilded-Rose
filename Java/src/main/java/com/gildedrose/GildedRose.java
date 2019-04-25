@@ -1,6 +1,9 @@
 package com.gildedrose;
 
 class GildedRose {
+    static final String SULFURAS_HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
+    static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
+    static final String AGED_BRIE = "Aged Brie";
     Item[] items;
 
     GildedRose(Item[] items) {
@@ -9,62 +12,89 @@ class GildedRose {
 
     void updateQuality() {
         for (Item item : items) {
-            decreaseSellIn(item);
-            if (isAgedBrie(item)) {
-                if (item.sellIn < 0) {
-                    increaseQualityOf(item, 2);
-                } else {
-                    increaseQualityOf(item, 1);
-                }
+            if (isLegendary(item)) {
+                item.quality = getNewQualityForLegendaryItem(item.sellIn, item.quality);
+            } else if (isAgedBrie(item)) {
+                decreaseSellIn(item);
+                item.quality = getNewQualityForAgedBrie(item.quality, item.sellIn);
             } else if (isBackstage(item)) {
-                if (item.sellIn >= 10) {
-                    increaseQualityOf(item, 1);
-                } else if (item.sellIn >= 5) {
-                    increaseQualityOf(item, 2);
-                } else if (item.sellIn >= 0) {
-                    increaseQualityOf(item, 3);
-                } else {
-                    item.quality = 0;
-                }
+                decreaseSellIn(item);
+                item.quality = getNewQualityForBackstagePasses(item.sellIn, item.quality);
             } else {
-                if (item.sellIn < 0) {
-                    lowerQualityOf(item, 2);
-                } else {
-                    lowerQualityOf(item, 1);
-                }
+                decreaseSellIn(item);
+                item.quality = getNewQualityForCommonItems(item.sellIn, item.quality);
             }
         }
+    }
+
+    private int getNewQualityForCommonItems(int sellIn, int quality) {
+        int newQuality = quality;
+        if (sellIn < 0) {
+            if (quality > 0) {
+                newQuality = quality - 2 < 0 ? 0 : quality - 2;
+            }
+        } else {
+            if (quality > 0) {
+                newQuality = quality - 1;
+            }
+        }
+
+        return newQuality;
+    }
+
+    private int getNewQualityForLegendaryItem(int sellIn, int quality) {
+        return quality;
+    }
+
+    private int getNewQualityForBackstagePasses(int sellIn, int quality) {
+        int newQuality = quality;
+        if (sellIn >= 10) {
+            if (quality < 50) {
+                newQuality = quality + 1;
+            }
+        } else if (sellIn >= 5) {
+            if (quality < 50) {
+                newQuality = quality + 2 > 50 ? 50 : quality + 2;
+            }
+        } else if (sellIn >= 0) {
+            if (quality < 50) {
+                newQuality = quality + 3 > 50 ? 50 : quality + 3;
+            }
+        } else {
+            newQuality = 0;
+        }
+
+        return newQuality;
+    }
+
+    private int getNewQualityForAgedBrie(final int quality, final int sellIn) {
+        int newQuality = quality;
+        if (sellIn < 0) {
+            if (quality < 50) {
+                newQuality = quality + 2 > 50 ? 50 : quality + 2;
+
+            }
+        } else {
+            if (quality < 50) {
+                newQuality = quality + 1;
+            }
+        }
+        return newQuality;
     }
 
     private void decreaseSellIn(Item item) {
-        if (isNotLegendary(item)) {
-            item.sellIn--;
-        }
+        item.sellIn--;
     }
 
-    private boolean isNotLegendary(Item item) {
-        return !item.name.equals("Sulfuras, Hand of Ragnaros");
+    private boolean isLegendary(Item item) {
+        return item.name.equals(SULFURAS_HAND_OF_RAGNAROS);
     }
 
     private boolean isBackstage(Item item) {
-        return item.name.equals("Backstage passes to a TAFKAL80ETC concert");
+        return item.name.equals(BACKSTAGE_PASSES);
     }
 
     private boolean isAgedBrie(Item item) {
-        return item.name.equals("Aged Brie");
-    }
-
-    private void increaseQualityOf(Item item, int number) {
-        if (item.quality < 50) {
-            item.quality = item.quality + number > 50 ? 50 : item.quality + number;
-        }
-    }
-
-    private void lowerQualityOf(Item item, int number) {
-        if (item.quality > 0) {
-            if (isNotLegendary(item)) {
-                item.quality = item.quality - number < 0 ? 0 : item.quality - number;
-            }
-        }
+        return item.name.equals(AGED_BRIE);
     }
 }
