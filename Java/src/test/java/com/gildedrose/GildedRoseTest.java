@@ -25,6 +25,15 @@ public class GildedRoseTest {
     }
 
     @Test
+    public void backstage_increase_by_1_when_sellIn_is_over_10() {
+        Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", 12, 20)};
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+
+        assertThat(app.items[0].quality).isEqualTo(21);
+    }
+
+    @Test
     public void backstage_increase_by_2_when_sellIn_is_between_10_and_6() {
         Item[] items = new Item[]{new Item("Backstage passes to a TAFKAL80ETC concert", 9, 20)};
         GildedRose app = new GildedRose(items);
@@ -49,5 +58,23 @@ public class GildedRoseTest {
         app.updateQuality();
 
         assertThat(app.items[0].quality).isEqualTo(0);
+    }
+
+    @Test
+    public void brie_increase_by_1_when_sellIn_is_positive() {
+        Item[] items = new Item[]{new Item("Aged Brie", 2, 34)};
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+
+        assertThat(app.items[0].quality).isEqualTo(35);
+    }
+
+    @Test
+    public void brie_increase_by_2_when_sellIn_is_strict_negative() {
+        Item[] items = new Item[]{new Item("Aged Brie", 0, 34)};
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+
+        assertThat(app.items[0].quality).isEqualTo(36);
     }
 }
