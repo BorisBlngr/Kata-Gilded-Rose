@@ -9,14 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(JUnitParamsRunner.class)
 public class GildedRoseTest {
-    @Test
-    public void common_item_decrease_in_quality() {
-        Item[] items = new Item[]{new Item("foo", 2, 2)};
-        GildedRose app = new GildedRose(items);
-        app.updateQuality();
-
-        assertThat(app.items[0].quality).isEqualTo(1);
-    }
 
     @Parameters({"0,0", "0,1", "1,1"})
     @Test
@@ -35,6 +27,24 @@ public class GildedRoseTest {
         app.updateQuality();
 
         assertThat(app.items[0].quality).isEqualTo(50);
+    }
+
+    @Test
+    public void common_item_decrease_in_quality() {
+        Item[] items = new Item[]{new Item("foo", 2, 2)};
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+
+        assertThat(app.items[0].quality).isEqualTo(1);
+    }
+
+    @Test
+    public void common_item_decrease_in_quality_by_2_when_sellIn_is_negative() {
+        Item[] items = new Item[]{new Item("foo", 0, 2)};
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+
+        assertThat(app.items[0].quality).isEqualTo(0);
     }
 
     @Test
@@ -92,11 +102,20 @@ public class GildedRoseTest {
     }
 
     @Test
-    public void common_item_decrease_in_quality_by_2_when_sellIn_is_negative() {
-        Item[] items = new Item[]{new Item("foo", 0, 2)};
+    public void legendary_item_never_decrease_in_quality() {
+        Item[] items = new Item[]{new Item("Sulfuras, Hand of Ragnaros", 0, 80)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
 
-        assertThat(app.items[0].quality).isEqualTo(0);
+        assertThat(app.items[0].quality).isEqualTo(80);
+    }
+
+    @Test
+    public void legendary_item_never_decrease_in_sellIn() {
+        Item[] items = new Item[]{new Item("Sulfuras, Hand of Ragnaros", 0, 80)};
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+
+        assertThat(app.items[0].sellIn).isEqualTo(0);
     }
 }
