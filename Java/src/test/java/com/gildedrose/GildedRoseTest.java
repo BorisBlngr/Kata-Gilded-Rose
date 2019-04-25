@@ -22,6 +22,15 @@ public class GildedRoseTest {
     }
 
     @Test
+    public void item_quality_should_never_be_greater_that_50_unless_it_is_legendary() {
+        Item[] items = new Item[]{new Item("Aged Brie", 2, 50)};
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+
+        assertThat(app.items[0].quality).isEqualTo(50);
+    }
+
+    @Test
     public void golden_master() throws IOException {
         List<String> result = new ArrayList<>();
 
