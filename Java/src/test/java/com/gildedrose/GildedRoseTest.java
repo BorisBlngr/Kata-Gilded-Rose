@@ -1,6 +1,5 @@
 package com.gildedrose;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -9,16 +8,17 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class GildedRoseTest {
 
     @Test
-    public void foo() {
+    public void item_quality_should_never_be_negative() {
         Item[] items = new Item[]{new Item("foo", 0, 0)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
-        assertEquals("foo", app.items[0].name);
+
+        assertThat(app.items[0].quality).isGreaterThanOrEqualTo(0);
     }
 
     @Test
@@ -53,11 +53,12 @@ public class GildedRoseTest {
 
         List<String> expected = Files.readAllLines(Paths.get("src/test/resources/goldenMaster.txt"));
 
-        Assertions.assertThat(result).containsExactlyElementsOf(expected);
+        assertThat(result).containsExactlyElementsOf(expected);
     }
 
     private void print(String line, List<String> result) {
         result.add(line);
         System.out.println(line);
     }
+
 }
