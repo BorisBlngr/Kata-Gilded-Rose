@@ -5,6 +5,14 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class GildedRoseTest {
+    @Test
+    public void common_item_decrease_in_quality() {
+        Item[] items = new Item[]{new Item("foo", 2, 2)};
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+
+        assertThat(app.items[0].quality).isEqualTo(1);
+    }
 
     @Test
     public void item_quality_should_never_be_negative() {
