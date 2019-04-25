@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-public class ItemStrategies {
+class ItemStrategies {
 
     private Map<String, BiFunction<Integer, Integer, Integer>> strategies;
     private BiFunction<Integer, Integer, Integer> defaultStrategy;
 
 
-    public ItemStrategies() {
+    ItemStrategies() {
         this.strategies = new HashMap<>();
         this.strategies.put(GildedRose.AGED_BRIE, this::getNewQualityForAgedBrie);
         this.strategies.put(GildedRose.BACKSTAGE_PASSES, this::getNewQualityForBackstagePasses);
@@ -19,11 +19,11 @@ public class ItemStrategies {
         this.defaultStrategy = this::getNewQualityForCommonItems;
     }
 
-    public BiFunction<Integer, Integer, Integer> getStrategyFor(String itemName) {
+    BiFunction<Integer, Integer, Integer> getStrategyFor(String itemName) {
         return this.strategies.getOrDefault(itemName, this.defaultStrategy);
     }
 
-    private int getNewQualityForAgedBrie(final int quality, final int sellIn) {
+    private int getNewQualityForAgedBrie(final int sellIn, final int quality) {
         int newQuality = quality;
         if (sellIn < 0) {
             if (quality < 50) {
