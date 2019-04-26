@@ -20,6 +20,7 @@ class ItemStrategies {
         this.strategies.put(GildedRose.AGED_BRIE, this::getNewQualityForAgedBrie);
         this.strategies.put(GildedRose.BACKSTAGE_PASSES, this::getNewQualityForBackstagePasses);
         this.strategies.put(GildedRose.SULFURAS_HAND_OF_RAGNAROS, this::getNewQualityForLegendaryItem);
+        this.strategies.put(GildedRose.CONJURED_MANA_CAKE, this::getNewQualityForConjuredManaCake);
 
         this.defaultStrategy = this::getNewQualityForCommonItems;
     }
@@ -80,6 +81,20 @@ class ItemStrategies {
             }
         }
 
+        return newQuality;
+    }
+
+    private int getNewQualityForConjuredManaCake(int sellIn, int quality) {
+        int newQuality = quality;
+        if (sellIn < 0) {
+            if (quality > QUALITY_MIN) {
+                newQuality = Math.max(quality - 4, QUALITY_MIN);
+            }
+        } else {
+            if (quality > QUALITY_MIN) {
+                newQuality = quality - 2;
+            }
+        }
         return newQuality;
     }
 }

@@ -118,4 +118,14 @@ public class GildedRoseTest {
 
         assertThat(app.items[0].sellIn).isEqualTo(0);
     }
+
+    @Parameters({"2,10,8", "0,10,6"})
+    @Test
+    public void conjured_item_degrades_twice_faster(int sellIn, int quality, int qualityExpected) {
+        Item[] items = new Item[]{new Item(GildedRose.CONJURED_MANA_CAKE, sellIn, quality)};
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+
+        assertThat(app.items[0].quality).isEqualTo(qualityExpected);
+    }
 }
