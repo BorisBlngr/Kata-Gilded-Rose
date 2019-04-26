@@ -119,7 +119,7 @@ public class GildedRoseTest {
         assertThat(app.items[0].sellIn).isEqualTo(0);
     }
 
-    @Parameters({"2,10,8", "0,10,6"})
+    @Parameters({"2,10,8", "0,10,6", "2,1,0"})
     @Test
     public void conjured_item_degrades_twice_faster(int sellIn, int quality, int qualityExpected) {
         Item[] items = new Item[]{new Item(GildedRose.CONJURED_MANA_CAKE, sellIn, quality)};

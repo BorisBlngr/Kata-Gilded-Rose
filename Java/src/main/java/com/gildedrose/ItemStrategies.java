@@ -70,31 +70,15 @@ class ItemStrategies {
     }
 
     private int getNewQualityForCommonItems(int sellIn, int quality) {
-        int newQuality = quality;
-        if (sellIn < 0) {
-            if (quality > QUALITY_MIN) {
-                newQuality = Math.max(quality - 2, QUALITY_MIN);
-            }
-        } else {
-            if (quality > QUALITY_MIN) {
-                newQuality = quality - 1;
-            }
-        }
-
-        return newQuality;
+        return getNewQualityForDecreasableItemWithRate(sellIn, quality, 1);
     }
 
     private int getNewQualityForConjuredManaCake(int sellIn, int quality) {
-        int newQuality = quality;
-        if (sellIn < 0) {
-            if (quality > QUALITY_MIN) {
-                newQuality = Math.max(quality - 4, QUALITY_MIN);
-            }
-        } else {
-            if (quality > QUALITY_MIN) {
-                newQuality = quality - 2;
-            }
-        }
-        return newQuality;
+        return getNewQualityForDecreasableItemWithRate(sellIn, quality, 2);
+    }
+
+    private int getNewQualityForDecreasableItemWithRate(int sellIn, int quality, int rate) {
+        int applicableRate = sellIn < 0 ? rate * 2 : rate;
+        return Math.max(quality - applicableRate, QUALITY_MIN);
     }
 }
