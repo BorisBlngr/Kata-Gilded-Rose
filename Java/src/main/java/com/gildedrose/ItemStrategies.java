@@ -2,18 +2,21 @@ package com.gildedrose;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+import java.util.TreeMap;
 import java.util.function.BiFunction;
 
 class ItemStrategies {
 
     private static final int QUALITY_MAX = 50;
     private static final int QUALITY_MIN = 0;
-    private static final int SIMPLE_INCREASE_LIMIT = 10;
-    private static final int DOUBLE_INCREASE_LIMIT = 5;
-    private static final int TRIPLE_INCREASE_LIMIT = 0;
     private Map<String, BiFunction<Integer, Integer, Integer>> strategies;
     private BiFunction<Integer, Integer, Integer> defaultStrategy;
-
+    private TreeMap<Integer, Integer> backstagePassesStages = new TreeMap<Integer, Integer>() {{
+        put(0, 3);
+        put(5, 2);
+        put(10, 1);
+    }};
 
     ItemStrategies() {
         this.strategies = new HashMap<>();
@@ -39,25 +42,13 @@ class ItemStrategies {
     }
 
     private int getNewQualityForBackstagePasses(int sellIn, int quality) {
-        int newQuality = quality;
-        if (sellIn >= SIMPLE_INCREASE_LIMIT) {
-            if (quality < QUALITY_MAX) {
-                newQuality = quality + 1;
-            }
-        } else if (sellIn >= DOUBLE_INCREASE_LIMIT) {
-            if (quality < QUALITY_MAX) {
-                newQuality = Math.min(quality + 2, QUALITY_MAX);
-            }
-        } else if (sellIn >= TRIPLE_INCREASE_LIMIT) {
-            if (quality < QUALITY_MAX) {
-                newQuality = Math.min(quality + 3, QUALITY_MAX);
-            }
-        } else {
-            newQuality = QUALITY_MIN;
-        }
+        int qualityGain = Optional.ofNullable(backstagePassesStages.floorEntry(sellIn))
+                .map(Map.Entry::getValue)
+                .orElseGet(() -> -quality);
 
-        return newQuality;
+        return Math.min(quality + qualityGain, QUALITY_MAX);
     }
+
 
     private int getNewQualityForCommonItems(int sellIn, int quality) {
         return getNewQualityForDecreasableItemWithRate(sellIn, quality, 1);
