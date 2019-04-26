@@ -30,18 +30,8 @@ class ItemStrategies {
     }
 
     private int getNewQualityForAgedBrie(final int sellIn, final int quality) {
-        int newQuality = quality;
-        if (sellIn < 0) {
-            if (quality < QUALITY_MAX) {
-                newQuality = quality + 2 > QUALITY_MAX ? QUALITY_MAX : quality + 2;
-
-            }
-        } else {
-            if (quality < QUALITY_MAX) {
-                newQuality = quality + 1;
-            }
-        }
-        return newQuality;
+        int increaseNumber = sellIn < 0 ? 2 : 1;
+        return Math.min(quality + increaseNumber, QUALITY_MAX);
     }
 
     private int getNewQualityForLegendaryItem(int sellIn, int quality) {
