@@ -21,7 +21,7 @@ class GildedRose {
     }
 
     private int decreaseSellIn(int sellIn) {
-        return --sellIn;
+        return sellIn - 1;
     }
 
     private boolean isLegendary(Item item) {
