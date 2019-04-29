@@ -113,11 +113,11 @@ public class GildedRoseTest {
 
     @Test
     public void legendary_item_never_decrease_in_sellIn() {
-        Item[] items = new Item[]{new Item(ItemFactory.SULFURAS_HAND_OF_RAGNAROS, 0, 80)};
+        Item[] items = new Item[]{new Item(ItemFactory.SULFURAS_HAND_OF_RAGNAROS, 2, 80)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
 
-        assertThat(app.items[0].sellIn).isEqualTo(0);
+        assertThat(app.items[0].sellIn).isEqualTo(2);
     }
 
     @Parameters({"2,10,8", "0,10,6", "2,1,0"})

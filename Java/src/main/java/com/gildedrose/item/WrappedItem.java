@@ -4,28 +4,25 @@ import com.gildedrose.Item;
 
 import java.util.Objects;
 
-import static com.gildedrose.strategy.ItemStrategy.QUALITY_MIN;
-
 public abstract class WrappedItem {
-    private Item item;
+    static int QUALITY_MAX = 50;
+    private static int QUALITY_MIN = 0;
+    protected Item item;
 
     WrappedItem(Item item) {
         this.item = item;
     }
 
     void update() {
-        this.item = new Item(item.name, updateSellIn(), updateQuality());
+        updateQuality();
+        updateSellIn();
     }
 
-    private int updateQuality() {
-        return getNewQualityForDecreasableItemWithRate(item.sellIn, item.quality, 1);
-    }
+    protected abstract void updateQuality();
 
-    private int updateSellIn() {
-        return item.sellIn - 1;
-    }
+    protected abstract void updateSellIn();
 
-    private int getNewQualityForDecreasableItemWithRate(int sellIn, int quality, int rate) {
+    int getNewQualityForDecreasableItemWithRate(int sellIn, int quality, int rate) {
         int applicableRate = sellIn < 0 ? rate * 2 : rate;
         return Math.max(quality - applicableRate, QUALITY_MIN);
     }

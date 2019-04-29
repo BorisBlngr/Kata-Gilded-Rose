@@ -6,4 +6,12 @@ class LegendaryItem extends WrappedItem {
     LegendaryItem(Item item) {
         super(item);
     }
+
+    @Override
+    protected void updateQuality() {
+    }
+
+    @Override
+    protected void updateSellIn() {
+    }
 }
