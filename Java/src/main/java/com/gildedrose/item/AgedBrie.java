@@ -4,7 +4,7 @@ import com.gildedrose.Item;
 
 import static java.lang.Math.min;
 
-class AgedBrie extends WrappedItem {
+class AgedBrie extends VariableItem {
     AgedBrie(Item item) {
         super(item);
     }

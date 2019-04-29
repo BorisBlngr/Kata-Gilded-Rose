@@ -8,7 +8,6 @@ import static java.lang.Math.max;
 
 public abstract class WrappedItem {
     protected final static int QUALITY_MIN = 0;
-    protected final static int QUALITY_MAX = 50;
     protected Item item;
 
     WrappedItem(Item item) {
@@ -33,13 +32,10 @@ public abstract class WrappedItem {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         WrappedItem that = (WrappedItem) o;
-
         return Objects.equals(item.name, that.item.name) &&
                 Objects.equals(item.quality, that.item.quality) &&
                 Objects.equals(item.sellIn, that.item.sellIn);
-
     }
 
     @Override

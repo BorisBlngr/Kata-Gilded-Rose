@@ -2,7 +2,7 @@ package com.gildedrose.item;
 
 import com.gildedrose.Item;
 
-class Conjured extends WrappedItem {
+class Conjured extends VariableItem {
     Conjured(Item item) {
         super(item);
     }

@@ -8,7 +8,7 @@ import java.util.TreeMap;
 
 import static java.lang.Math.min;
 
-public class BackstagePass extends WrappedItem {
+public class BackstagePass extends VariableItem {
     private TreeMap<Integer, Integer> backstagePassesStages = new TreeMap<Integer, Integer>() {{
         put(0, 3);
         put(5, 2);

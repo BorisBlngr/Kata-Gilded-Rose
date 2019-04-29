@@ -36,11 +36,8 @@ public class WrappedItems {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         WrappedItems that = (WrappedItems) o;
-
         return Objects.equals(wrappedItems, that.wrappedItems);
-
     }
 
     @Override

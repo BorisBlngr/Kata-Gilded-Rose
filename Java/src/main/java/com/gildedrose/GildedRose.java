@@ -2,14 +2,14 @@ package com.gildedrose;
 
 import com.gildedrose.item.WrappedItems;
 
-class GildedRose {
-    Item[] items;
+public class GildedRose {
+    public Item[] items;
 
-    GildedRose(Item[] items) {
+    public GildedRose(Item[] items) {
         this.items = items;
     }
 
-    void update() {
+    public void update() {
         WrappedItems.of(items)
                 .updateAll();
     }

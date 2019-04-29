@@ -2,7 +2,7 @@ package com.gildedrose.item;
 
 import com.gildedrose.Item;
 
-class Common extends WrappedItem {
+class Common extends VariableItem {
     Common(Item item) {
         super(item);
     }
