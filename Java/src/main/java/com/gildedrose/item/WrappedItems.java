@@ -1,13 +1,24 @@
 package com.gildedrose.item;
 
+import com.gildedrose.Item;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import static java.util.stream.Collectors.toList;
 
 public class WrappedItems {
     private List<WrappedItem> wrappedItems;
 
-    public WrappedItems(List<WrappedItem> wrappedItems) {
-        this.wrappedItems = wrappedItems;
+    private WrappedItems(Item... items) {
+        wrappedItems = Arrays.stream(items)
+                .map(ItemFactory::buildFrom)
+                .collect(toList());
+    }
+
+    public static WrappedItems of(Item... items) {
+        return new WrappedItems(items);
     }
 
     public void updateAll() {

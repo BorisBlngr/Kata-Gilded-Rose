@@ -15,6 +15,6 @@ class AgedBrieItem extends WrappedItem {
 
     @Override
     protected void updateSellIn() {
-        item.sellIn--;
+        --item.sellIn;
     }
 }

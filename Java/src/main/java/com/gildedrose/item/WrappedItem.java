@@ -5,17 +5,17 @@ import com.gildedrose.Item;
 import java.util.Objects;
 
 public abstract class WrappedItem {
-    static int QUALITY_MAX = 50;
-    private static int QUALITY_MIN = 0;
+    protected static int QUALITY_MIN = 0;
+    protected static int QUALITY_MAX = 50;
     protected Item item;
 
     WrappedItem(Item item) {
         this.item = item;
     }
 
-    void update() {
-        updateQuality();
+    public void update() {
         updateSellIn();
+        updateQuality();
     }
 
     protected abstract void updateQuality();
