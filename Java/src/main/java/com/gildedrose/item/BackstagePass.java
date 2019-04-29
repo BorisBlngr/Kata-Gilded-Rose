@@ -6,14 +6,14 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
 
-public class BackstagePassItem extends WrappedItem {
+public class BackstagePass extends WrappedItem {
     private TreeMap<Integer, Integer> backstagePassesStages = new TreeMap<Integer, Integer>() {{
         put(0, 3);
         put(5, 2);
         put(10, 1);
     }};
 
-    BackstagePassItem(Item item) {
+    BackstagePass(Item item) {
         super(item);
     }
 

@@ -2,8 +2,8 @@ package com.gildedrose.item;
 
 import com.gildedrose.Item;
 
-class AgedBrieItem extends WrappedItem {
-    AgedBrieItem(Item item) {
+class AgedBrie extends WrappedItem {
+    AgedBrie(Item item) {
         super(item);
     }
 

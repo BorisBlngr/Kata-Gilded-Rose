@@ -13,7 +13,7 @@ public abstract class WrappedItem {
         this.item = item;
     }
 
-    public void update() {
+    void update() {
         updateSellIn();
         updateQuality();
     }

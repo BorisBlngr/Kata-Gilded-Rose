@@ -12,7 +12,7 @@ public class ItemFactoryTest {
         Item item = new Item("FooBar", 1, 12);
         WrappedItem wrappedItem = ItemFactory.buildFrom(item);
 
-        assertThat(wrappedItem).isInstanceOf(CommonItem.class);
+        assertThat(wrappedItem).isInstanceOf(Common.class);
     }
 
     @Test
@@ -20,7 +20,7 @@ public class ItemFactoryTest {
         Item item = new Item(ItemFactory.SULFURAS_HAND_OF_RAGNAROS, 1, 12);
         WrappedItem wrappedItem = ItemFactory.buildFrom(item);
 
-        assertThat(wrappedItem).isInstanceOf(LegendaryItem.class);
+        assertThat(wrappedItem).isInstanceOf(Legendary.class);
     }
 
     @Test
@@ -28,7 +28,7 @@ public class ItemFactoryTest {
         Item item = new Item(ItemFactory.CONJURED_MANA_CAKE, 1, 12);
         WrappedItem wrappedItem = ItemFactory.buildFrom(item);
 
-        assertThat(wrappedItem).isInstanceOf(ConjuredItem.class);
+        assertThat(wrappedItem).isInstanceOf(Conjured.class);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class ItemFactoryTest {
         Item item = new Item(ItemFactory.AGED_BRIE, 1, 12);
         WrappedItem wrappedItem = ItemFactory.buildFrom(item);
 
-        assertThat(wrappedItem).isInstanceOf(AgedBrieItem.class);
+        assertThat(wrappedItem).isInstanceOf(AgedBrie.class);
     }
 
     @Test
@@ -44,6 +44,6 @@ public class ItemFactoryTest {
         Item item = new Item(ItemFactory.BACKSTAGE_PASSES, 1, 12);
         WrappedItem wrappedItem = ItemFactory.buildFrom(item);
 
-        assertThat(wrappedItem).isInstanceOf(BackstagePassItem.class);
+        assertThat(wrappedItem).isInstanceOf(BackstagePass.class);
     }
 }

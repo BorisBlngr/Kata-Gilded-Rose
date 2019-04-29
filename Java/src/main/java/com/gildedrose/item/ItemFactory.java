@@ -11,21 +11,21 @@ public class ItemFactory {
 
     public static WrappedItem buildFrom(Item item) {
         if (item.name.equals(CONJURED_MANA_CAKE)) {
-            return new ConjuredItem(item);
+            return new Conjured(item);
         }
 
         if (item.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
-            return new LegendaryItem(item);
+            return new Legendary(item);
         }
 
         if (item.name.equals(AGED_BRIE)) {
-            return new AgedBrieItem(item);
+            return new AgedBrie(item);
         }
 
         if (item.name.equals(BACKSTAGE_PASSES)) {
-            return new BackstagePassItem(item);
+            return new BackstagePass(item);
         }
 
-        return new CommonItem(item);
+        return new Common(item);
     }
 }

@@ -2,14 +2,14 @@ package com.gildedrose.item;
 
 import com.gildedrose.Item;
 
-class ConjuredItem extends WrappedItem {
-    ConjuredItem(Item item) {
+class Common extends WrappedItem {
+    Common(Item item) {
         super(item);
     }
 
     @Override
     protected void updateQuality() {
-        this.item.quality = getNewQualityForDecreasableItemWithRate(item.sellIn, item.quality, 2);
+        item.quality = getNewQualityForDecreasableItemWithRate(item.sellIn, item.quality, 1);
     }
 
     @Override
