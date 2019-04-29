@@ -1,5 +1,6 @@
 package com.gildedrose;
 
+import com.gildedrose.item.ItemFactory;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.junit.Test;
@@ -22,7 +23,7 @@ public class GildedRoseTest {
 
     @Test
     public void item_quality_should_never_be_greater_that_50_unless_it_is_legendary() {
-        Item[] items = new Item[]{new Item(GildedRose.AGED_BRIE, 2, 50)};
+        Item[] items = new Item[]{new Item(ItemFactory.AGED_BRIE, 2, 50)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
 
@@ -49,7 +50,7 @@ public class GildedRoseTest {
 
     @Test
     public void backstage_increase_by_1_when_sellIn_is_over_10() {
-        Item[] items = new Item[]{new Item(GildedRose.BACKSTAGE_PASSES, 12, 20)};
+        Item[] items = new Item[]{new Item(ItemFactory.BACKSTAGE_PASSES, 12, 20)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
 
@@ -58,7 +59,7 @@ public class GildedRoseTest {
 
     @Test
     public void backstage_increase_by_2_when_sellIn_is_between_10_and_6() {
-        Item[] items = new Item[]{new Item(GildedRose.BACKSTAGE_PASSES, 9, 20)};
+        Item[] items = new Item[]{new Item(ItemFactory.BACKSTAGE_PASSES, 9, 20)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
 
@@ -67,7 +68,7 @@ public class GildedRoseTest {
 
     @Test
     public void backstage_increase_by_3_when_sellIn_is_between_6_and_0() {
-        Item[] items = new Item[]{new Item(GildedRose.BACKSTAGE_PASSES, 4, 20)};
+        Item[] items = new Item[]{new Item(ItemFactory.BACKSTAGE_PASSES, 4, 20)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
 
@@ -76,7 +77,7 @@ public class GildedRoseTest {
 
     @Test
     public void backstage_quality_is_0_when_sellIn_is_lower_than_0() {
-        Item[] items = new Item[]{new Item(GildedRose.BACKSTAGE_PASSES, 0, 20)};
+        Item[] items = new Item[]{new Item(ItemFactory.BACKSTAGE_PASSES, 0, 20)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
 
@@ -85,7 +86,7 @@ public class GildedRoseTest {
 
     @Test
     public void brie_increase_by_1_when_sellIn_is_positive() {
-        Item[] items = new Item[]{new Item(GildedRose.AGED_BRIE, 2, 34)};
+        Item[] items = new Item[]{new Item(ItemFactory.AGED_BRIE, 2, 34)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
 
@@ -94,7 +95,7 @@ public class GildedRoseTest {
 
     @Test
     public void brie_increase_by_2_when_sellIn_is_strict_negative() {
-        Item[] items = new Item[]{new Item(GildedRose.AGED_BRIE, 0, 34)};
+        Item[] items = new Item[]{new Item(ItemFactory.AGED_BRIE, 0, 34)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
 
@@ -103,7 +104,7 @@ public class GildedRoseTest {
 
     @Test
     public void legendary_item_never_decrease_in_quality() {
-        Item[] items = new Item[]{new Item(GildedRose.SULFURAS_HAND_OF_RAGNAROS, 0, 80)};
+        Item[] items = new Item[]{new Item(ItemFactory.SULFURAS_HAND_OF_RAGNAROS, 0, 80)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
 
@@ -112,7 +113,7 @@ public class GildedRoseTest {
 
     @Test
     public void legendary_item_never_decrease_in_sellIn() {
-        Item[] items = new Item[]{new Item(GildedRose.SULFURAS_HAND_OF_RAGNAROS, 0, 80)};
+        Item[] items = new Item[]{new Item(ItemFactory.SULFURAS_HAND_OF_RAGNAROS, 0, 80)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
 
@@ -122,10 +123,11 @@ public class GildedRoseTest {
     @Parameters({"2,10,8", "0,10,6", "2,1,0"})
     @Test
     public void conjured_item_degrades_twice_faster(int sellIn, int quality, int qualityExpected) {
-        Item[] items = new Item[]{new Item(GildedRose.CONJURED_MANA_CAKE, sellIn, quality)};
+        Item[] items = new Item[]{new Item(ItemFactory.CONJURED_MANA_CAKE, sellIn, quality)};
         GildedRose app = new GildedRose(items);
         app.updateQuality();
 
         assertThat(app.items[0].quality).isEqualTo(qualityExpected);
     }
+
 }

@@ -1,5 +1,6 @@
 package com.gildedrose;
 
+import com.gildedrose.item.ItemFactory;
 import com.gildedrose.strategy.*;
 
 import java.util.HashMap;
@@ -15,10 +16,10 @@ class ItemStrategies {
 
     ItemStrategies() {
         this.strategies = new HashMap<>();
-        this.strategies.put(GildedRose.AGED_BRIE, new AgedBrieStrategy());
-        this.strategies.put(GildedRose.BACKSTAGE_PASSES, new BackstagePassesStrategy());
-        this.strategies.put(GildedRose.SULFURAS_HAND_OF_RAGNAROS, new LegendaryItemStrategy());
-        this.strategies.put(GildedRose.CONJURED_MANA_CAKE, new ConjuredManaCakeStrategy());
+        this.strategies.put(ItemFactory.AGED_BRIE, new AgedBrieStrategy());
+        this.strategies.put(ItemFactory.BACKSTAGE_PASSES, new BackstagePassesStrategy());
+        this.strategies.put(ItemFactory.SULFURAS_HAND_OF_RAGNAROS, new LegendaryItemStrategy());
+        this.strategies.put(ItemFactory.CONJURED_MANA_CAKE, new ConjuredManaCakeStrategy());
 
         this.defaultStrategy = new CommonItemStrategy();
     }
