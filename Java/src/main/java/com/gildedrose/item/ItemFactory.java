@@ -9,7 +9,7 @@ public class ItemFactory {
     public static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
     public static final String AGED_BRIE = "Aged Brie";
 
-    public static WrappedItem buildFrom(Item item) {
+    static WrappedItem buildFrom(Item item) {
         if (item.name.equals(CONJURED_MANA_CAKE)) {
             return new Conjured(item);
         }

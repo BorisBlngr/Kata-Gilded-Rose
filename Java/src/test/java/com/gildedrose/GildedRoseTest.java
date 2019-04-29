@@ -21,6 +21,7 @@ public class GildedRoseTest {
         assertThat(app.items[0].quality).isGreaterThanOrEqualTo(0);
     }
 
+
     @Test
     public void item_quality_should_never_be_greater_that_50_unless_it_is_legendary() {
         Item[] items = new Item[]{new Item(ItemFactory.AGED_BRIE, 2, 50)};
@@ -109,6 +110,15 @@ public class GildedRoseTest {
         app.update();
 
         assertThat(app.items[0].quality).isEqualTo(80);
+    }
+
+    @Test
+    public void item_decrease_in_sellIn() {
+        Item[] items = new Item[]{new Item(ItemFactory.CONJURED_MANA_CAKE, 2, 49)};
+        GildedRose app = new GildedRose(items);
+        app.update();
+
+        assertThat(app.items[0].sellIn).isEqualTo(1);
     }
 
     @Test
