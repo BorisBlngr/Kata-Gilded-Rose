@@ -8,6 +8,6 @@ public class LegendaryItemStrategy implements ItemStrategy {
 
     @Override
     public int computeNewSellIn(int sellIn) {
-        return 0;
+        return sellIn;
     }
 }

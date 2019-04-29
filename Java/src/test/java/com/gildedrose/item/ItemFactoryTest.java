@@ -14,4 +14,12 @@ public class ItemFactoryTest {
 
         assertThat(wrappedItem).isInstanceOf(LegendaryItem.class);
     }
+
+    @Test
+    public void itemMustBeConjured() {
+        Item item = new Item(ItemFactory.CONJURED_MANA_CAKE, 1, 12);
+        WrappedItem wrappedItem = ItemFactory.buildFrom(item);
+
+        assertThat(wrappedItem).isInstanceOf(ConjuredItem.class);
+    }
 }
