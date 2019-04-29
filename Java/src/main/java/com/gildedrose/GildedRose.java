@@ -14,10 +14,8 @@ class GildedRose {
     void updateQuality() {
         ItemStrategies itemStrategies = new ItemStrategies();
         for (Item item : items) {
-            if (!isLegendary(item)) {
-                item.sellIn = decreaseSellIn(item.sellIn);
-            }
-            item.quality = itemStrategies.getStrategyFor(item.name).apply(item.sellIn, item.quality);
+            item.sellIn = itemStrategies.getSellInStrategyFor(item.name).apply(item.sellIn, item.quality);
+            item.quality = itemStrategies.getQualityStrategyFor(item.name).apply(item.sellIn, item.quality);
         }
     }
 

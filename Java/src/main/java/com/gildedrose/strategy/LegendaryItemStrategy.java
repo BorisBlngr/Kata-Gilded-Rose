@@ -5,4 +5,9 @@ public class LegendaryItemStrategy implements ItemStrategy {
     public int computeNewQuality(int sellIn, int quality) {
         return quality;
     }
+
+    @Override
+    public int computeNewSellIn(int sellIn, int quality) {
+        return 0;
+    }
 }

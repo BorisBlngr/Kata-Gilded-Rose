@@ -10,4 +10,8 @@ public interface ItemStrategy {
     }
 
     int computeNewQuality(int sellIn, int quality);
+
+    default int computeNewSellIn(int sellIn, int quality) {
+        return sellIn - 1;
+    }
 }

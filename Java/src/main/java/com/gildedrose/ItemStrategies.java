@@ -8,22 +8,26 @@ import java.util.function.BiFunction;
 
 class ItemStrategies {
 
-    private Map<String, BiFunction<Integer, Integer, Integer>> strategies;
-    private BiFunction<Integer, Integer, Integer> defaultStrategy;
+    private Map<String, ItemStrategy> strategies;
+    private ItemStrategy defaultStrategy;
 
 
     ItemStrategies() {
         this.strategies = new HashMap<>();
-        this.strategies.put(GildedRose.AGED_BRIE, (sellIn, quality) -> new AgedBrieStrategy().computeNewQuality(sellIn, quality));
-        this.strategies.put(GildedRose.BACKSTAGE_PASSES, (sellIn, quality) -> new BackstagePassesStrategy().computeNewQuality(sellIn, quality));
-        this.strategies.put(GildedRose.SULFURAS_HAND_OF_RAGNAROS, (sellIn, quality) -> new LegendaryItemStrategy().computeNewQuality(sellIn, quality));
-        this.strategies.put(GildedRose.CONJURED_MANA_CAKE, (sellIn, quality) -> new ConjuredManaCakeStrategy().computeNewQuality(sellIn, quality));
+        this.strategies.put(GildedRose.AGED_BRIE, new AgedBrieStrategy());
+        this.strategies.put(GildedRose.BACKSTAGE_PASSES, new BackstagePassesStrategy());
+        this.strategies.put(GildedRose.SULFURAS_HAND_OF_RAGNAROS, new LegendaryItemStrategy());
+        this.strategies.put(GildedRose.CONJURED_MANA_CAKE, new ConjuredManaCakeStrategy());
 
-        this.defaultStrategy = new CommonItemStrategy()::computeNewQuality;
+        this.defaultStrategy = new CommonItemStrategy();
     }
 
-    BiFunction<Integer, Integer, Integer> getStrategyFor(String itemName) {
-        return this.strategies.getOrDefault(itemName, this.defaultStrategy);
+    BiFunction<Integer, Integer, Integer> getQualityStrategyFor(String itemName) {
+        return this.strategies.getOrDefault(itemName, this.defaultStrategy)::computeNewQuality;
+    }
+
+    BiFunction<Integer, Integer, Integer> getSellInStrategyFor(String itemName) {
+        return this.strategies.getOrDefault(itemName, this.defaultStrategy)::computeNewSellIn;
     }
 
 }
