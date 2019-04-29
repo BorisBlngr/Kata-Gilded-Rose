@@ -30,4 +30,12 @@ public class ItemFactoryTest {
 
         assertThat(wrappedItem).isInstanceOf(AgedBrieItem.class);
     }
+
+    @Test
+    public void itemMustBeCommon() {
+        Item item = new Item("FooBar", 1, 12);
+        WrappedItem wrappedItem = ItemFactory.buildFrom(item);
+
+        assertThat(wrappedItem).isInstanceOf(CommonItem.class);
+    }
 }
