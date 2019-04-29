@@ -8,6 +8,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ItemFactoryTest {
 
     @Test
+    public void itemMustBeCommon() {
+        Item item = new Item("FooBar", 1, 12);
+        WrappedItem wrappedItem = ItemFactory.buildFrom(item);
+
+        assertThat(wrappedItem).isInstanceOf(CommonItem.class);
+    }
+
+    @Test
     public void itemMustBeLegendary() {
         Item item = new Item(ItemFactory.SULFURAS_HAND_OF_RAGNAROS, 1, 12);
         WrappedItem wrappedItem = ItemFactory.buildFrom(item);
@@ -32,10 +40,10 @@ public class ItemFactoryTest {
     }
 
     @Test
-    public void itemMustBeCommon() {
-        Item item = new Item("FooBar", 1, 12);
+    public void itemMustBeBackstagePass() {
+        Item item = new Item(ItemFactory.BACKSTAGE_PASSES, 1, 12);
         WrappedItem wrappedItem = ItemFactory.buildFrom(item);
 
-        assertThat(wrappedItem).isInstanceOf(CommonItem.class);
+        assertThat(wrappedItem).isInstanceOf(BackstagePassItem.class);
     }
 }

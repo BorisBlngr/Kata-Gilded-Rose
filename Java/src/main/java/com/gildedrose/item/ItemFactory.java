@@ -22,6 +22,10 @@ public class ItemFactory {
             return new AgedBrieItem(item);
         }
 
+        if (item.name.equals(BACKSTAGE_PASSES)) {
+            return new BackstagePassItem(item);
+        }
+
         return new CommonItem(item);
     }
 }
