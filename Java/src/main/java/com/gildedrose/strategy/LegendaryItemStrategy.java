@@ -7,7 +7,7 @@ public class LegendaryItemStrategy implements ItemStrategy {
     }
 
     @Override
-    public int computeNewSellIn(int sellIn, int quality) {
+    public int computeNewSellIn(int sellIn) {
         return 0;
     }
 }

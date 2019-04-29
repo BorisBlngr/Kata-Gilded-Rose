@@ -5,6 +5,7 @@ import com.gildedrose.strategy.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
 class ItemStrategies {
 
@@ -26,7 +27,7 @@ class ItemStrategies {
         return this.strategies.getOrDefault(itemName, this.defaultStrategy)::computeNewQuality;
     }
 
-    BiFunction<Integer, Integer, Integer> getSellInStrategyFor(String itemName) {
+    Function<Integer, Integer> getSellInStrategyFor(String itemName) {
         return this.strategies.getOrDefault(itemName, this.defaultStrategy)::computeNewSellIn;
     }
 

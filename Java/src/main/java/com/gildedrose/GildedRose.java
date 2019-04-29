@@ -14,16 +14,8 @@ class GildedRose {
     void updateQuality() {
         ItemStrategies itemStrategies = new ItemStrategies();
         for (Item item : items) {
-            item.sellIn = itemStrategies.getSellInStrategyFor(item.name).apply(item.sellIn, item.quality);
+            item.sellIn = itemStrategies.getSellInStrategyFor(item.name).apply(item.sellIn);
             item.quality = itemStrategies.getQualityStrategyFor(item.name).apply(item.sellIn, item.quality);
         }
-    }
-
-    private int decreaseSellIn(int sellIn) {
-        return sellIn - 1;
-    }
-
-    private boolean isLegendary(Item item) {
-        return item.name.equals(SULFURAS_HAND_OF_RAGNAROS);
     }
 }
