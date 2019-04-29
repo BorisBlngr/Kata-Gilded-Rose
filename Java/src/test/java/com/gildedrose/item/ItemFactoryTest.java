@@ -22,4 +22,12 @@ public class ItemFactoryTest {
 
         assertThat(wrappedItem).isInstanceOf(ConjuredItem.class);
     }
+
+    @Test
+    public void itemMustBeAgedBrie() {
+        Item item = new Item(ItemFactory.AGED_BRIE, 1, 12);
+        WrappedItem wrappedItem = ItemFactory.buildFrom(item);
+
+        assertThat(wrappedItem).isInstanceOf(AgedBrieItem.class);
+    }
 }

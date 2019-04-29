@@ -18,6 +18,10 @@ public class ItemFactory {
             return new LegendaryItem(item);
         }
 
+        if (item.name.equals(AGED_BRIE)) {
+            return new AgedBrieItem(item);
+        }
+
         return new CommonItem(item);
     }
 }
