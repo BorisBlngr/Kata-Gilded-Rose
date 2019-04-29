@@ -4,9 +4,11 @@ import com.gildedrose.Item;
 
 import java.util.Objects;
 
+import static java.lang.Math.max;
+
 public abstract class WrappedItem {
-    protected static int QUALITY_MIN = 0;
-    protected static int QUALITY_MAX = 50;
+    protected final static int QUALITY_MIN = 0;
+    protected final static int QUALITY_MAX = 50;
     protected Item item;
 
     WrappedItem(Item item) {
@@ -24,7 +26,7 @@ public abstract class WrappedItem {
 
     int getNewQualityForDecreasableItemWithRate(int sellIn, int quality, int rate) {
         int applicableRate = sellIn < 0 ? rate * 2 : rate;
-        return Math.max(quality - applicableRate, QUALITY_MIN);
+        return max(quality - applicableRate, QUALITY_MIN);
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.gildedrose.item;
 
 import com.gildedrose.Item;
 
+import static java.lang.Math.min;
+
 class AgedBrie extends WrappedItem {
     AgedBrie(Item item) {
         super(item);
@@ -10,7 +12,7 @@ class AgedBrie extends WrappedItem {
     @Override
     protected void updateQuality() {
         int increaseNumber = item.sellIn < 0 ? 2 : 1;
-        item.quality = Math.min(item.quality + increaseNumber, QUALITY_MAX);
+        item.quality = min(item.quality + increaseNumber, QUALITY_MAX);
     }
 
     @Override

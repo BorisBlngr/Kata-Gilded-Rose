@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
 
+import static java.lang.Math.min;
+
 public class BackstagePass extends WrappedItem {
     private TreeMap<Integer, Integer> backstagePassesStages = new TreeMap<Integer, Integer>() {{
         put(0, 3);
@@ -23,7 +25,7 @@ public class BackstagePass extends WrappedItem {
                 .map(Map.Entry::getValue)
                 .orElseGet(() -> -item.quality);
 
-        item.quality = Math.min(this.item.quality + qualityGain, QUALITY_MAX);
+        item.quality = min(this.item.quality + qualityGain, QUALITY_MAX);
     }
 
     @Override

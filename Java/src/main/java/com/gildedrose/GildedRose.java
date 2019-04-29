@@ -10,6 +10,7 @@ class GildedRose {
     }
 
     void update() {
-        WrappedItems.of(items).updateAll();
+        WrappedItems.of(items)
+                .updateAll();
     }
 }
